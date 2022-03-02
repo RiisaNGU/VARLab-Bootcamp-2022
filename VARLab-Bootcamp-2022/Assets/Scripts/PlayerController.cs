@@ -16,15 +16,15 @@ public class PlayerController : MonoBehaviour
     private bool onGround = true;
 
     ///<summary>Current state of the player
-    [System.Flags]
-    enum States
-    {
-        Moving = 1,
-        Jumping = 1,
-        Falling = 1,
-        OnGround = 1
-    }
-    private States state;
+    //[System.Flags]
+    //enum States
+    //{
+    //    Moving = 1,
+    //    Jumping = 1,
+    //    Falling = 1,
+    //    OnGround = 1
+    //}
+    //private States state;
 
 
     private void Awake()
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         /// <summary>moving left and right
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        Vector2 movement = new Vector2(movementX, movementY);
         rb.AddForce(movement * speed);
     }
 
