@@ -5,8 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0;
-    public float jumpHeight = 0;
+    [SerializeField] private float speed = 0;
+    [SerializeField] private float jumpHeight = 0;
 
     private InputAction action;
 
@@ -16,13 +16,15 @@ public class PlayerController : MonoBehaviour
     private bool onGround = true;
 
     ///<summary>Current state of the player
+    /// For a "Paper MArio" style implementation
+    /// Switches camera/game modes
     [System.Flags]
     enum States
     {
         twoDMode,
         threeDMode
     }
-    private States state = States.twoDMode; // 2D default
+    private States state = States.twoDMode; // 2D is default
 
 
     private void Awake()
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         action = new InputAction();
     }
 
+    /// <summary>Detects whether the player is on the ground, or some solid surface
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform")
@@ -49,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
     void OnJump(InputValue jump)
     {
-        /// <summary> jumping using [space], currently infinite jumping???
+        /// <summary> jumping using [space]
         float j = jump.Get<float>();
 
         if (onGround == true)
@@ -61,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        /// <summary>moving left and right
+        /// <summary>Moving the player left and right
         Vector2 movement = new Vector2(movementX, movementY);
         rb.AddForce(movement * speed);
     }

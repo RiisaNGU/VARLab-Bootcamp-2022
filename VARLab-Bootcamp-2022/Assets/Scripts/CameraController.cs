@@ -5,27 +5,21 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public GameObject player;
-    //private float minY = -0.0075f;
-    //private float maxY = 100f;
-
-    //private float minX = 0.0f;
-    //private float maxX = 100f;
+    private float maxCamY = -2.5f;
 
     private Vector3 offset;
 
-    // Start is called before the first frame update
     void Start()
     {
         offset = transform.position - player.transform.position;
     }
-
-    private void Update()
-    {
-       
-    }
-
     void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        // if player Y coord is below a certain point, stop the camera -> for falling out of bounds
+        if(player.transform.position.y > maxCamY)
+        {
+            transform.position = player.transform.position + offset;
+        }
+        
     }
 }
