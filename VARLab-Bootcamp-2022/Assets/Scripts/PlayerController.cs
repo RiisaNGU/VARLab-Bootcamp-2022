@@ -16,15 +16,13 @@ public class PlayerController : MonoBehaviour
     private bool onGround = true;
 
     ///<summary>Current state of the player
-    //[System.Flags]
-    //enum States
-    //{
-    //    Moving = 1,
-    //    Jumping = 1,
-    //    Falling = 1,
-    //    OnGround = 1
-    //}
-    //private States state;
+    [System.Flags]
+    enum States
+    {
+        twoDMode,
+        threeDMode
+    }
+    private States state = States.twoDMode; // 2D default
 
 
     private void Awake()
