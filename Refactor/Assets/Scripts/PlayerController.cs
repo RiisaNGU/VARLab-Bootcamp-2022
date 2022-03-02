@@ -13,39 +13,63 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
-    private float movementZ;
+    private bool onGround = true;
+
+    ///<summary>Current state of the player
+    [System.Flags]
+    enum States
+    {
+        Moving = 1,
+        Jumping = 1,
+        Falling = 1,
+        OnGround = 1
+    }
+    private States state;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        action = new InputAction();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            onGround = true;
+        }
     }
 
     void OnMove(InputValue movementValue)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
+        Vector2 move= movementValue.Get<Vector2>();
 
-        movementX = movementVector.x;
-        movementZ = movementVector.y;
+        movementX = move.x;
+        movementY = move.y;
     }
 
     void OnJump(InputValue jump)
     {
-        Vector3 j = jump.Get<Vector3>();
+        /// <summary> jumping using [space], currently infinite jumping???
+        float j = jump.Get<float>();
 
-        movementY = j.z;
-
-        rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+        if (onGround == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpHeight);
+            onGround = false;
+        }
     }
 
     void FixedUpdate()
     {
-        // moving left and right
-        Vector3 movement = new Vector3(movementX, 0.0f, movementZ);
+        /// <summary>moving left and right
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
     }
 
-    void Update()
+    private void Update()
     {
-
+        
     }
 }
