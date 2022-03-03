@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private bool onGround = true;
 
     ///<summary>Current state of the player
-    /// For a "Paper MArio" style implementation
+    /// For a "Paper Mario" style implementation
     /// Switches camera/game modes
     [System.Flags]
     enum States
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>Detects whether the player is on the ground, or some solid surface
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Platform")
         {
             onGround = true;
         }

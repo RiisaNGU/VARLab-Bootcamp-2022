@@ -8,7 +8,7 @@ public class Parallax : MonoBehaviour
     public GameObject cam;
     public float parallax;
 
-    void Start()
+    void Awake()
     {
         startpos = transform.position.x;
         length = GetComponent<SpriteRenderer>().bounds.size.x;
