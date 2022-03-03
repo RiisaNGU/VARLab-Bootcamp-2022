@@ -8,12 +8,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 0;
     [SerializeField] private float jumpHeight = 0;
 
-    private InputAction action;
+    private Animator animator;
+    private Avatar avatar;
 
     private Rigidbody rb;
+    public GameObject projectile;
+
     private float movementX;
     private float movementY;
     private bool onGround = true;
+    //private bool thrown = true;     // for the snowball item
 
     ///<summary>Current state of the player
     /// For a "Paper Mario" style implementation
@@ -30,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        action = new InputAction();
+        animator = GetComponentInChildren<Animator>(); // model is a child of the "Player" object
     }
 
     /// <summary>Detects whether the player is on the ground, or some solid surface
@@ -40,6 +44,11 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }
+
+        if(collision.gameObject.tag == "Snowballs")
+        {
+            //thrown = false;
+        }
     }
 
     void OnMove(InputValue movementValue)
@@ -48,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
         movementX = move.x;
         movementY = move.y;
+
+        //animator.SetBool("Run", true);
     }
 
     void OnJump(InputValue jump)
@@ -62,15 +73,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnAttack(InputValue click)
+    {
+        animator.SetBool("LeftClick", true);
+        Debug.Log("Attack");
+        //thrown = true;
+
+        GameObject clone;
+        clone = Instantiate(projectile, transform.position, transform.rotation);
+        clone.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 1, 1)*10);
+
+    }
+
+    void OnDefend(InputValue click)
+    {
+        animator.SetBool("RightClick", true);
+        //thrown = true;
+    }
+
     void FixedUpdate()
     {
         /// <summary>Moving the player left and right
         Vector2 movement = new Vector2(movementX, movementY);
         rb.AddForce(movement * speed);
+
+
+        /// <summary> Reset animations
+        animator.SetBool("LeftClick", false);
+        animator.SetBool("RightClick", false);
+        //animator.SetBool("Run", false);
     }
 
-    private void Update()
-    {
-        
-    }
 }

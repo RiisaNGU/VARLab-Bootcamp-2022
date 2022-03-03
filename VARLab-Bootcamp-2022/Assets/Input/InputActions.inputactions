@@ -24,7 +24,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Fire",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "4c28b0e1-2286-4a08-8da4-98ac9764ac65",
                     "expectedControlType": "Button",
@@ -36,6 +36,15 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "76788b85-2f46-4eee-8256-4ca8d5a71063",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Defend",
+                    "type": "Button",
+                    "id": "1427d318-df8c-445f-afa3-ab8baf365d82",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -182,7 +191,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad;3DMode;2DMode",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -193,7 +202,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse;2DMode;3DMode",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -204,7 +213,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Joystick;3DMode;2DMode",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -215,7 +224,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "XR;3DMode;2DMode",
-                    "action": "Fire",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -238,6 +247,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse;2DMode;3DMode",
                     "action": "SwitchCam",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "76c0b84c-cc7d-4674-bb45-cfd6a1bfbcb1",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;3DMode;2DMode",
+                    "action": "Defend",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
