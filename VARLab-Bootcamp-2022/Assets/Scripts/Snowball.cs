@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Snowball : MonoBehaviour
 {
-    private GameObject snowball;
+    //private GameObject snowball;
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
-            Destroy(snowball);
+            Destroy(gameObject);
+        }
+
+        if(collision.gameObject.tag == "Snowman")
+        {
+            Debug.Log("Hit");
         }
     }
 }

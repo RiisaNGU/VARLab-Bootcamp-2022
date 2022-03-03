@@ -10,6 +10,7 @@ TagManager:
   - OutOfBounds
   - Snowballs
   - playerball
+  - Snowman
   layers:
   - Default
   - TransparentFX
