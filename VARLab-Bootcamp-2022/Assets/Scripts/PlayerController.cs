@@ -8,16 +8,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 0;
     [SerializeField] private float jumpHeight = 0;
 
-    private Animator animator;
-    private Avatar avatar;
+    private Animator animator;              // for animations
 
     private Rigidbody rb;
-    public GameObject projectile;
+    public GameObject projectile;           // for snowball projectile
 
     private float movementX;
     private float movementY;
-    private bool onGround = true;
-    //private bool thrown = true;     // for the snowball item
+    private bool onGround = true;           // checks whether the player is currently grounded
+    private float direction;                // checks the player's current facing direction
 
     ///<summary>Current state of the player
     /// For a "Paper Mario" style implementation
@@ -44,11 +43,6 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }
-
-        if(collision.gameObject.tag == "Snowballs")
-        {
-            //thrown = false;
-        }
     }
 
     void OnMove(InputValue movementValue)
@@ -58,7 +52,15 @@ public class PlayerController : MonoBehaviour
         movementX = move.x;
         movementY = move.y;
 
-        //animator.SetBool("Run", true);
+        if(direction > move.x) // if player is facing left, flip the model, if facing right, return to normal
+        {
+            Debug.Log("left");
+
+        }
+
+
+        // set animation
+        animator.SetBool("Run", true);
     }
 
     void OnJump(InputValue jump)
@@ -77,18 +79,20 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("LeftClick", true);
         Debug.Log("Attack");
-        //thrown = true;
 
-        GameObject clone;
-        clone = Instantiate(projectile, transform.position, transform.rotation);
-        clone.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 1, 1)*10);
+        // Creates snowballs and adds a force to them
+        GameObject clone = Instantiate(projectile, transform.position, transform.rotation);
+        clone.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(500, 300, 0));
 
     }
 
     void OnDefend(InputValue click)
     {
         animator.SetBool("RightClick", true);
-        //thrown = true;
+
+        // Creates snowballs and adds a force to them - but faster
+        GameObject clone = Instantiate(projectile, transform.position, transform.rotation);
+        clone.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(900, 150, 0));
     }
 
     void FixedUpdate()
@@ -97,11 +101,16 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(movementX, movementY);
         rb.AddForce(movement * speed);
 
-
         /// <summary> Reset animations
         animator.SetBool("LeftClick", false);
         animator.SetBool("RightClick", false);
-        //animator.SetBool("Run", false);
+
+        if(movement.x == 0)
+        {
+            animator.SetBool("Run", false);
+        }
+
+        direction = movementX;                  // current facing direction (left or right)
     }
 
 }

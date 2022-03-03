@@ -5,7 +5,6 @@ using UnityEngine;
 public class Snowball : MonoBehaviour
 {
     private GameObject snowball;
-    private Rigidbody rb;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -13,7 +12,5 @@ public class Snowball : MonoBehaviour
         {
             Destroy(snowball);
         }
-
-        
     }
 }
