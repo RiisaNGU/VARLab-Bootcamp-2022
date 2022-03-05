@@ -8,9 +8,8 @@ TagManager:
   - Walls
   - Platform
   - OutOfBounds
-  - Snowballs
-  - playerball
   - Snowman
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDeath : MonoBehaviour
+namespace VARLabBootCamp2022
 {
-    /// <summary>Restarts the current scene upon player "death" -- aka when they fall out of bounds
-    private void OnCollisionEnter(Collision collision)
+    public class PlayerDeath : MonoBehaviour
     {
-        if(collision.gameObject.tag == "Player")
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        /// <summary>Restarts the current scene upon player "death" -- aka when they fall out of bounds
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Player")
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

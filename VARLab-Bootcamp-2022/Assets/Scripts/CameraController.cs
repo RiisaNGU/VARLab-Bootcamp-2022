@@ -2,24 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+namespace VARLabBootCamp2022
 {
-    public GameObject player;
-    private float maxCamY = -2.5f;
-
-    private Vector3 offset;
-
-    void Awake()
+    public class CameraController : MonoBehaviour
     {
-        offset = transform.position - player.transform.position;
-    }
-    void LateUpdate()
-    {
-        // if player Y coord is below a certain point, stop the camera -> for falling out of bounds
-        if(player.transform.position.y > maxCamY)
+        public GameObject player;
+        private float maxCamY = -2.5f;
+
+        private Vector3 offset;
+
+        void Awake()
         {
-            transform.position = player.transform.position + offset;
+            offset = transform.position - player.transform.position;
         }
-        
+        void LateUpdate()
+        {
+            // if player Y coord is below a certain point, stop the camera -> for falling out of bounds
+            if (player.transform.position.y > maxCamY)
+            {
+                transform.position = player.transform.position + offset;
+            }
+
+        }
     }
 }
